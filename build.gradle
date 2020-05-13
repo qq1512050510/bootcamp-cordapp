@@ -1,3 +1,14 @@
+
+apply plugin: 'idea'
+idea {
+    module {
+        //如果您讨厌浏览Javadoc
+        downloadJavadoc = true
+
+        //并且喜欢阅读资源:)
+        downloadSources = true
+    }
+}
 buildscript {
     ext.corda_release_group = 'net.corda'
     ext.corda_release_version = 'corda-3.0'
@@ -23,14 +34,14 @@ buildscript {
 }
 
 repositories {
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
     mavenLocal()
     jcenter()
-    mavenCentral()
+    //mavenCentral()
     maven { url 'https://jitpack.io' }
     maven { url 'https://ci-artifactory.corda.r3cev.com/artifactory/corda-releases' }
     flatDir { dirs "${project.rootProject.projectDir}/lib/dependencies" }
-    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
-}
+  }
 
 apply plugin: 'java'
 apply plugin: 'net.corda.plugins.cordapp'
