@@ -29,6 +29,7 @@ repositories {
     maven { url 'https://jitpack.io' }
     maven { url 'https://ci-artifactory.corda.r3cev.com/artifactory/corda-releases' }
     flatDir { dirs "${project.rootProject.projectDir}/lib/dependencies" }
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
 }
 
 apply plugin: 'java'
