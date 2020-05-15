@@ -136,3 +136,7 @@ task gatherDependencies(type: Copy) {
     from configurations.testRuntime
     from configurations.quasar
 }
+//gradle config encoding
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
