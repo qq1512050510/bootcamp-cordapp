@@ -8,6 +8,7 @@ import net.corda.core.identity.Party;
 import net.corda.core.node.NodeInfo;
 import net.corda.core.node.ServiceHub;
 
+import java.time.Instant;
 import java.util.List;
 
 @InitiatingFlow
@@ -23,6 +24,8 @@ public class TwoPartyInitiatingFlow extends FlowLogic<Integer> {
 
     @Suspendable
     public Integer call() throws FlowException {
+        
+        Instant instant = Instant.now();
 
         ServiceHub serviceHub = getServiceHub();
         List<StateAndRef<HouseState>> stateAndRefs = serviceHub.getVaultService().queryBy(HouseState.class).getStates();
