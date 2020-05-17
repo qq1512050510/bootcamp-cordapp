@@ -13,6 +13,15 @@ import java.security.PublicKey;
 import java.util.List;
 
 public class HouseContract implements Contract {
+    public static String ID = "java_bootcamp.IOU.HouseContract";
+
+    public static String getID() {
+        return ID;
+    }
+
+    public static void setID(String ID) {
+        HouseContract.ID = ID;
+    }
 
     @Override
     public void verify(@NotNull LedgerTransaction tx) throws IllegalArgumentException {
@@ -58,7 +67,7 @@ public class HouseContract implements Contract {
         }
     }
 
-    public class Register implements CommandData {
+    public static class Register implements CommandData {
 
     }
 
