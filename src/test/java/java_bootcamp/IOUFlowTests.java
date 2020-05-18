@@ -56,6 +56,7 @@ public class IOUFlowTests {
         assertEquals(1, signedTransaction.getTx().getOutputStates().size());
         IOUState output = signedTransaction.getTx().outputsOfType(IOUState.class).get(0);
 
+
         assertEquals(nodeB.getInfo().getLegalIdentities().get(0), output.getOwner());
         assertEquals(99, output.getAmount());
     }

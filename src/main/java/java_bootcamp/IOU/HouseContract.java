@@ -39,7 +39,6 @@ public class HouseContract implements Contract {
             if (tx.getOutputs().size() != 1) {
                 throw new IllegalArgumentException("Register transaction must have one output");
             }
-
             //content constraint
             ContractState outputState = tx.getOutput(0);
             if (!(outputState instanceof HouseState)) {
@@ -52,14 +51,12 @@ public class HouseContract implements Contract {
             if (houseState.getOwner().getName().getCountry().equals("CN")) {
                 throw new IllegalArgumentException("Owner of the house must be in China");
             }
-
             // Required Signer constraint
             Party owner = houseState.getOwner();
             PublicKey ownerKey = owner.getOwningKey();
             if (!requiredKey.contains(ownerKey)) {
                 throw new IllegalArgumentException("Owner of the house must sign the registration");
             }
-
         } else if (commandType instanceof Transfer) {
 
         } else {

@@ -43,15 +43,20 @@ public class IOUIssueFlow extends FlowLogic<SignedTransaction> {
          *         TODO 1 - Create our IOUState to represent on-ledger tokens!
          * ===========================================================================*/
         // We create our new TokenState.
-        IOUState tokenState = null;
-
+        IOUState iouState = new IOUState(issuer,owner,new Double(amount));
+        IOUContract.Commands.Issue command = new IOUContract.Commands.Issue();
 
 
         /* ============================================================================
          *      TODO 3 - Build our token issuance transaction to update the ledger!
          * ===========================================================================*/
         // We build our transaction.
-        TransactionBuilder transactionBuilder = null;
+        TransactionBuilder transactionBuilder = new TransactionBuilder();
+        transactionBuilder.setNotary(notary);
+        transactionBuilder.addOutputState(iouState,IOUContract.ID);
+        transactionBuilder.addCommand(command,iouState.getIssuer().getOwningKey());
+
+
 
         /* ============================================================================
          *          TODO 2 - Write our TokenContract to control token issuance!
