@@ -1,3 +1,14 @@
+apply plugin: 'idea'
+
+idea {
+    module {
+        // if you hate browsing Javadoc
+        downloadJavadoc = true
+        // and love reading sources :)
+        downloadSources = true
+    }
+}
+
 buildscript {
     ext {
         corda_release_group = 'net.corda'
@@ -17,6 +28,7 @@ buildscript {
         mavenLocal()
         mavenCentral()
         jcenter()
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/central/' }
         maven { url 'https://jitpack.io' }
         maven { url 'https://ci-artifactory.corda.r3cev.com/artifactory/corda-releases' }
         maven { url 'https://repo.gradle.org/gradle/libs-releases' }
@@ -34,6 +46,7 @@ repositories {
     mavenLocal()
     jcenter()
     mavenCentral()
+    maven { url 'http://maven.aliyun.com/nexus/content/repositories/central/' }
     maven { url 'https://jitpack.io' }
     maven { url 'https://ci-artifactory.corda.r3cev.com/artifactory/corda-releases' }
     maven { url 'https://repo.gradle.org/gradle/libs-releases' }
@@ -44,6 +57,8 @@ apply plugin: 'java'
 apply plugin: 'net.corda.plugins.cordapp'
 apply plugin: 'net.corda.plugins.cordformation'
 apply plugin: 'net.corda.plugins.quasar-utils'
+
+
 
 
 dependencies {
@@ -142,4 +157,9 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
         }
         rpcUsers = [[user: "user1", password: "test", permissions: ["ALL"]]]
     }
+
+}
+//gradle config encoding
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
 }

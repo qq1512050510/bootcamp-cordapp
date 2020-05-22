@@ -2,12 +2,16 @@ package bootcamp.IOU;
 
 
 import co.paralleluniverse.fibers.Suspendable;
+import com.google.common.collect.ImmutableList;
 import net.corda.core.flows.*;
 import net.corda.core.identity.Party;
 import net.corda.core.transactions.SignedTransaction;
 import net.corda.core.transactions.TransactionBuilder;
 import net.corda.core.utilities.ProgressTracker;
 
+
+import java.security.PublicKey;
+import java.util.List;
 
 import static java.util.Collections.singletonList;
 
@@ -54,8 +58,8 @@ public class IOUIssueFlow extends FlowLogic<SignedTransaction> {
         TransactionBuilder transactionBuilder = new TransactionBuilder();
         transactionBuilder.setNotary(notary);
         transactionBuilder.addOutputState(iouState,IOUContract.ID);
-        transactionBuilder.addCommand(command,iouState.getIssuer().getOwningKey());
-
+        List<PublicKey> requiredSigner = ImmutableList.of(iouState.getIssuer().getOwningKey(),owner.getOwningKey());
+        transactionBuilder.addCommand(command,requiredSigner);
 
 
         /* ============================================================================

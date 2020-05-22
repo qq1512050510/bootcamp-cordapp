@@ -14,8 +14,8 @@ import java.util.List;
 /* Our contract, governing how our state will evolve over time.
  * See src/main/java/java_examples/ArtContract.java for an example. */
 public class IOUContract implements Contract {
-    public static String ID = "java_bootcamp.IOU.IOUContract";
 
+    public static String ID = "bootcamp.IOU.IOUContract";
 
     @Override
     public void verify(@NotNull LedgerTransaction tx) throws IllegalArgumentException {
@@ -35,7 +35,7 @@ public class IOUContract implements Contract {
                 throw new IllegalArgumentException("Register transaction must have one output");
             }
 
-            //1. output is Iou$State?
+            //1. output is IOUState?
             if (!(tx.getOutput(0) instanceof IOUState)) {
                 throw new IllegalArgumentException("Output state must be a IOUState");
             }

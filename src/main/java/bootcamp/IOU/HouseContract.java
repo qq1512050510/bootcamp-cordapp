@@ -13,7 +13,7 @@ import java.security.PublicKey;
 import java.util.List;
 
 public class HouseContract implements Contract {
-    public static String ID = "java_bootcamp.IOU.HouseContract";
+    public static String ID = "bootcamp.IOU.HouseContract";
 
     public static String getID() {
         return ID;

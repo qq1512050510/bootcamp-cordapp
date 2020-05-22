@@ -3,12 +3,26 @@ package bootcamp;
 import bootcamp.IOU.IOUContract;
 import bootcamp.IOU.IOUState;
 import net.corda.core.contracts.Contract;
+import net.corda.core.contracts.StateAndRef;
+import net.corda.core.contracts.UniqueIdentifier;
+import net.corda.core.identity.AbstractParty;
 import net.corda.core.identity.CordaX500Name;
+import net.corda.core.identity.Party;
+import net.corda.core.transactions.TransactionBuilder;
+import net.corda.finance.contracts.Fix;
+import net.corda.finance.contracts.FixOf;
+import net.corda.finance.contracts.FixableDealState;
 import net.corda.testing.contracts.DummyState;
 import net.corda.testing.core.DummyCommandData;
 import net.corda.testing.core.TestIdentity;
 import net.corda.testing.node.MockServices;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
+
+import java.time.Instant;
+import java.util.Date;
+import java.util.List;
 
 import static net.corda.testing.node.NodeTestUtils.*;
 import static java.lang.System.out;
@@ -19,7 +33,42 @@ public class IOUContractTests {
     private final TestIdentity bob = new TestIdentity(new CordaX500Name("Bob", "", "GB"));
     private MockServices ledgerServices = new MockServices(new TestIdentity(new CordaX500Name("TestId", "", "GB")));
     private IOUState tokenState = new IOUState(alice.getParty(), bob.getParty(), new Double(1));
+    private FixableDealState oracleState = new FixableDealState() {
+        @Nullable
+        @Override
+        public FixOf nextFixingOf() {
+            return null;
+        }
 
+        @NotNull
+        @Override
+        public Party getOracle() {
+            return null;
+        }
+
+        @Override
+        public void generateFix(@NotNull TransactionBuilder ptx, @NotNull StateAndRef<?> oldState, @NotNull Fix fix) {
+
+        }
+
+        @NotNull
+        @Override
+        public TransactionBuilder generateAgreement(@NotNull Party notary) {
+            return null;
+        }
+
+        @NotNull
+        @Override
+        public UniqueIdentifier getLinearId() {
+            return null;
+        }
+
+        @NotNull
+        @Override
+        public List<AbstractParty> getParticipants() {
+            return null;
+        }
+    };
     @Test
     public void test() {
         out.println("test");
@@ -39,6 +88,7 @@ public class IOUContractTests {
             tx.input(IOUContract.ID, tokenState);
             tx.output(IOUContract.ID, tokenState);
             tx.command(alice.getPublicKey(), new IOUContract.Commands.Issue());
+            //tx.timeWindow();
             tx.fails();
             return null;
         });
@@ -46,6 +96,7 @@ public class IOUContractTests {
         transaction(ledgerServices, tx -> {
             // Has no input, will verify.
             tx.output(IOUContract.ID, tokenState);
+            tx.reference(IOUContract.ID,oracleState);
             tx.command(alice.getPublicKey(), new IOUContract.Commands.Issue());
             tx.verifies();
             return null;
