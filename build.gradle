@@ -13,8 +13,8 @@ buildscript {
     ext {
         corda_release_group = 'net.corda'
         corda_core_release_group = 'net.corda'
-        corda_release_version = '4.3'
-        corda_core_release_version = '4.3'
+        corda_release_version = '4.4'
+        corda_core_release_version = '4.4'
         corda_gradle_plugins_version = '5.0.4'
         kotlin_version = '1.2.71'
         junit_version = '4.12'
