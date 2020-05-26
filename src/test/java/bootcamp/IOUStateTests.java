@@ -11,7 +11,7 @@ public class IOUStateTests {
     private final Party alice = new TestIdentity(new CordaX500Name("Alice", "", "GB")).getParty();
     private final Party bob = new TestIdentity(new CordaX500Name("Bob", "", "GB")).getParty();
 
-    @Test
+   /* @Test
     public void tokenStateHasIssuerOwnerAndAmountParamsOfCorrectTypeInConstructor() {
         new IOUState(alice, bob, new Double(1));
     }
@@ -43,5 +43,5 @@ public class IOUStateTests {
         //assertEquals(2, tokenState.getParticipants().size());
         assert(tokenState.getParticipants().contains(alice));
         assert(tokenState.getParticipants().contains(bob));
-    }
+    }*/
 }

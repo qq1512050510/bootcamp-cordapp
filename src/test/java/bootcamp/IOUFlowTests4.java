@@ -43,7 +43,7 @@ public class IOUFlowTests4 {
         network.stopNodes();
     }
 
-    @Test
+    /*@Test
     public void transactionConstructedByFlowUsesTheCorrectNotary() throws Exception {
         IOUIssueFlow flow = new IOUIssueFlow(nodeB.getInfo().getLegalIdentities().get(0), 99);
         CordaFuture<SignedTransaction> future = nodeA.startFlow(flow);
@@ -123,6 +123,6 @@ public class IOUFlowTests4 {
         // The single attachment is the contract attachment.
         assertEquals(1, signedTransaction.getTx().getAttachments().size());
         assertNull(signedTransaction.getTx().getTimeWindow());
-    }
+    }*/
 
 }

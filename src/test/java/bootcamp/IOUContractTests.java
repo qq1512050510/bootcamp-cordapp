@@ -72,7 +72,7 @@ public class IOUContractTests {
             return null;
         }
     };
-    @Test
+   /* @Test
     public void test() {
         out.println("test");
         out.println("开始测试");
@@ -258,5 +258,5 @@ public class IOUContractTests {
             tx.verifies();
             return null;
         });
-    }
+    }*/
 }

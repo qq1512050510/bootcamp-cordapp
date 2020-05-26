@@ -2,16 +2,18 @@ package bootcamp.IOU;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableTable;
-import net.corda.core.contracts.ContractState;
+import net.corda.core.contracts.*;
 import net.corda.core.identity.AbstractParty;
 import net.corda.core.identity.Party;
 import org.jetbrains.annotations.NotNull;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class AuctionState implements ContractState {
+public class AuctionState implements ContractState,FungibleAsset {
     //买方
     private List<Party> buyers;
     //卖方
@@ -56,5 +58,35 @@ public class AuctionState implements ContractState {
         Collections.addAll(parties, (Party[]) buyers.toArray());
         Collections.addAll(parties, sealer);
         return parties;
+    }
+
+    @NotNull
+    @Override
+    public Amount<Issued> getAmount() {
+        return null;
+    }
+
+    @NotNull
+    @Override
+    public Collection<PublicKey> getExitKeys() {
+        return null;
+    }
+
+    @NotNull
+    @Override
+    public FungibleAsset withNewOwnerAndAmount(@NotNull Amount newAmount, @NotNull AbstractParty newOwner) {
+        return null;
+    }
+
+    @NotNull
+    @Override
+    public AbstractParty getOwner() {
+        return null;
+    }
+
+    @NotNull
+    @Override
+    public CommandAndState withNewOwner(@NotNull AbstractParty newOwner) {
+        return null;
     }
 }
