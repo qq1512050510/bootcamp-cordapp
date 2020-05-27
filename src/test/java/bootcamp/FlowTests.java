@@ -38,6 +38,11 @@ public class FlowTests {
     public void tearDown() {
         network.stopNodes();
     }
+    
+    @Test
+    public void test() {
+    	System.out.print("test");
+    }
 
 //    @Test
 //    public void transactionConstructedByFlowUsesTheCorrectNotary() throws Exception {
